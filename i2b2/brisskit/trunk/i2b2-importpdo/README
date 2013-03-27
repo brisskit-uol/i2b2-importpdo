@@ -1,18 +1,51 @@
 ************************************************************************************************
-* This details the build required (at least for the moment) until a maven build can be devised.*
-* In fact to some degree a maven build is problematic. Finding all of the correct artifacts in *
-* public repository is questionable, and some may have licensing implications.                 *
+*                                         README                                               *
 ************************************************************************************************
-How to build and run.
-=====================
-(A) For the moment all the "external" dependencies can be found in genlib and lib directories.
-    Just ensure all of these are included in the classpath, together with the config directory.
-(B) The source code is contained within the src and gensrc directories.
-    The .classpath has been committed to svn, so most of this should be covered already by
-    that file (for Eclipse users of course).
-(C) If you wish to execute the programme, the JVM needs to be invoked with endorsed libraries:
-    -Djava.endorsed.dirs={some path statement here}/i2b2-importpdo/endorsed_lib
-(D) See the programme itself for command line args, or just try an execution without args 
+This README has three messages to put across:
+(A) How to set up the development environment to do small-scale changes. 
+    And - associated with this - how to do maven installs and deploys of the jar artifact. 
+(B) How to run the program, either for test or live purposes.
+(C) How the project was set up from scratch.
+    Some knowledge of this will be required for grosser development aims; 
+    for example, to produce an artifact based upon a newer version of i2b2.
+
+*********************************************
+* (A) Setting up for development            *
+*********************************************
+(1) You must have Maven 2 installed. 
+    Your settings.xml file should be one associated with the Brisskit project.
+(2) Set up the classpath variable M2_REPO within eclipse.
+    This should point to your local maven repository.
+(3) Edit the projects pom.xml file, ensuring that you set the ${exec.home} to
+    the correct java jdk setting. To do this examine first the maven-compiler-plugin
+    settings within the pom. This will set source and target for the compile
+    currently (Jan 2013) at 1.6. You will require a 1.6 jdk installation and this
+    is what the ${exec.home} should point to. This is the only 100% certain way
+    of compiling to a set level. Having a 1.7 compiler target 1.6 code is not perfect.
+(4) All the dependencies for the project are described within the maven pom file, 
+    and are available from the Brisskit maven repository. However, the jar artifact needs
+    to execute with the java vm running with endorsed libraries. For development purposes,
+    these endorsed libraries are held within the endorsed_lib directory.
+    In order to set the Eclipse classpath and populate the endorsed_lib directory 
+    run the script 'setup-development-environment.sh' from the project's top directory.
+    Then refresh your Eclipse environment.
+    There is a possibility you may need to edit your Eclipse classpath to include
+    resources (eg: properties files).
+(5) Standard maven commands should suffice thereafter...
+    mvn install
+    mvn deploy
+    You will need authorisation for deploying to the Brisskit repository.
+    This is best achieved by a public/private ssh keypair set up for an account on 
+    the machine which hosts the Brisskit maven repository.    
+    
+NB: Please try not to commit jar files to SVN
+
+*********************************************
+* (B) Program usage                         *
+*********************************************
+(1) If you wish to execute the program, the JVM needs to be invoked with endorsed libraries:
+   -Djava.endorsed.dirs={some path statement here}/i2b2-importpdo/endorsed_lib
+(2) See the programme itself for command line args, or just try an execution without args 
     to see the Usage statement...
     
     Usage: ImportPdo {Parameters}\n" +       
@@ -24,24 +57,31 @@ How to build and run.
 The config file (a normal Java properties file) holds details of user, password, PM url,
 domain ID and project id. See the example in the config/test-resources directory.
 
-This is how the project got off the ground.
-===========================================
+*********************************************
+* (C) Starting from scratch.                *
+********************************************* 
 (1) Within an Eclipse workspace import the following (at least) i2b2 workbench projects:
 	edu.harvard.i2b2.common
     edu.harvard.i2b2.eclipse.plugins.webservicesAxis2
     edu.harvard.i2b2.xml
-(2) The following separate import plugin 
-    (to generate the common, crc and fr code from schemas; use one of the ant builds):
-    edu.harvard.i2b2.eclipse.plugins.importData   
+(2) And also the following separate import plugin 
+    edu.harvard.i2b2.eclipse.plugins.importData 
+    (To generate the common, crc and fr code from schemas; use one of the ant builds). 
 (3) The following may help for study purposes:
-    edu.harvard.i2b2.eclipse                      (part of the workbench)
+    edu.harvard.i2b2.eclipse  (part of the workbench)
 (4) Make sure this project is sitting alongside all of the above detailed in (1) and (2)
-(5) The lib directory axis2-1.1, commons and jaxb were populated from the 
-    edu.harvard.i2b2.common/lib directory
-(6) Take a close look at the etc directory. It was composed from a number of the workbench
+(5) You will probably need an intermediate lib directory for axis and jaxb artifacts, which
+    are currently described in the maven pom file. 
+    These artifacts were originally taken from the the edu.harvard.i2b2.common/lib directory
+(6) You will probably also need a generated i2b2Common-core jar file for the given released
+    version of i2b2. One of the ant builds can achieve this.
+    Remember to deploy this generated jar to the Brisskit maven repo if it is not already there.
+(7) Take a close look at the etc directory. It was composed from a number of the workbench
     projects to get completeness.
-(7) The buildFiles directory contains basic ant builds adapted from the import plugin, but
+(8) The buildFiles directory contains basic ant builds adapted from the import plugin, but
     the builds are not 100% there.
     
 After the above steps you should have a clean build within Eclipse. 
-This is not ideal, of course. A maven build would be better (but this is proving problematic).
+You will then need to rejig the pom file dependencies to achieve a standard maven build.
+
+NB: Please try not to commit jar files to SVN

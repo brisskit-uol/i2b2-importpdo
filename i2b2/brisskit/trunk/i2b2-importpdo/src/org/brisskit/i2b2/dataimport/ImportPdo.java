@@ -1,7 +1,7 @@
 /**
  * 
  */
-package uk.org.briccs.dataimport;
+package org.brisskit.i2b2.dataimport;
 
 import java.io.File;
 import java.io.FileReader;
