@@ -1,7 +1,7 @@
-<project basedir="../" default="all" name="BRICCS importpdo">
+<project basedir="../" default="all" name="BRISSKIT importpdo">
 
 	
-	<property name="Project" value="uk.org.briccs.importpdo" />
+	<property name="Project" value="org.brisskit.i2b2.importpdo" />
 
 	<!-- ========== Executable Targets ======================================== -->
 	<property name="Name" value="importpdo" />
