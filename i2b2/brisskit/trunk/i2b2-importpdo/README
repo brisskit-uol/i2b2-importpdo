@@ -28,6 +28,7 @@ This README has three messages to put across:
     these endorsed libraries are held within the endorsed_lib directory.
     In order to set the Eclipse classpath and populate the endorsed_lib directory 
     run the script 'setup-development-environment.sh' from the project's top directory.
+    (Examine this script before running. The read-only userid and password for wget may have changed)
     Then refresh your Eclipse environment.
     There is a possibility you may need to edit your Eclipse classpath to include
     resources (eg: properties files).
