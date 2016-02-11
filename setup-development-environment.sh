@@ -17,9 +17,9 @@
 #=========================================================================== 
 cd ./endorsed_lib
 rm *
-wget --user=readonly --password=readonly..... http://maven.brisskit.org/nexus/content/repositories/thirdparty/jaxb/jaxb-api/x.x/jaxb-api-x.x.jar
-wget --user=readonly --password=readonly..... http://maven.brisskit.org/nexus/content/repositories/central/stax/stax-api/1.0.1/stax-api-1.0.1.jar
-wget --user=readonly --password=readonly..... http://maven.brisskit.org/nexus/content/repositories/central/woodstox/wstx-asl/3.0.1/wstx-asl-3.0.1.jar
+wget --user=readonly --password=readonly..... http://maven.brisskit.le.ac.uk/nexus/content/repositories/thirdparty/jaxb/jaxb-api/x.x/jaxb-api-x.x.jar
+wget --user=readonly --password=readonly..... http://maven.brisskit.le.ac.uk/nexus/content/repositories/central/stax/stax-api/1.0.1/stax-api-1.0.1.jar
+wget --user=readonly --password=readonly..... http://maven.brisskit.le.ac.uk/nexus/content/repositories/central/woodstox/wstx-asl/3.0.1/wstx-asl-3.0.1.jar
 cd ..
 
 
