@@ -35,9 +35,8 @@ This README has three messages to put across:
 (5) Standard maven commands should suffice thereafter...
     mvn install
     mvn deploy
-    You will need authorisation for deploying to the Brisskit repository.
-    This is best achieved by a public/private ssh keypair set up for an account on 
-    the machine which hosts the Brisskit maven repository.    
+    You will need requisite credentials in your Maven settings.xml file 
+    in order to deploy to the Brisskit repository.
     
 NB: Please try not to commit jar files to SVN
 
